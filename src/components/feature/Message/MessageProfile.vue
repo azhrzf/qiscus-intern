@@ -10,17 +10,17 @@ defineProps<{
 }>();
 
 const fallbackImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
-const imageError = ref<Record<string, boolean>>({})
+const imageError = ref<Record<number, boolean>>({})
 
-const handleImageError = (roomId: string) => {
+const handleImageError = (roomId: number) => {
     imageError.value[roomId] = true
 }
 
 const getImageSrc = (room: Room) => {
-    if (imageError.value[room.room_id] || !room.user_avatar_url) {
+    if (imageError.value[room.id] || !room.image_url) {
         return fallbackImage
     }
-    return room.user_avatar_url
+    return room.image_url
 }
 </script>
 
@@ -29,11 +29,11 @@ const getImageSrc = (room: Room) => {
         <Button @click="backToList" size="sm" variant="ghost" class="md:hidden p-2">
             <ArrowLeft class="w-5 h-5" />
         </Button>
-        <img :src="getImageSrc(selectedRoom)" :alt="selectedRoom.name" @error="handleImageError(selectedRoom.room_id)"
+        <img :src="getImageSrc(selectedRoom)" :alt="selectedRoom.name" @error="handleImageError(selectedRoom.id)"
             class="w-10 h-10 rounded-full object-cover" />
         <div>
             <h3 class="font-medium text-[#141414]">{{ selectedRoom.name }}</h3>
-            <p class="text-[#4f5665] text-sm">{{ selectedRoom.user_id }}</p>
+            <p class="text-[#4f5665] text-sm">{{ selectedRoom.participant.length }} participants</p>
         </div>
     </div>
 </template>

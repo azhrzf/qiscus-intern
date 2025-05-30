@@ -18,7 +18,8 @@ const { showChatView } = storeToRefs(uiStore)
 
 watch(() => route.params.roomId, (roomId) => {
   if (roomId && typeof roomId === 'string') {
-    chatStore.selectRoom(roomId)
+    const numericRoomId = parseInt(roomId)
+    chatStore.selectRoom(numericRoomId)
     uiStore.toggleChatView(true)
   } else {
     uiStore.toggleChatView(false)
@@ -32,8 +33,7 @@ const backToList = () => {
 </script>
 
 <template>
-  <main
-    class="h-full flex-1 flex flex-col absolute md:relative inset-0 transition-transform duration-300 ease-in-out"
+  <main class="h-full flex-1 flex flex-col absolute md:relative inset-0 transition-transform duration-300 ease-in-out"
     :class="showChatView ? 'translate-x-0' : 'translate-x-full md:translate-x-0'">
     <div v-if="error" class="p-4 bg-red-100 border-b border-red-200 text-red-700">
       {{ error }}

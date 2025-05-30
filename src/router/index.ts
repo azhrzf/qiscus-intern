@@ -11,10 +11,10 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: '/chat/:roomId',
+      path: '/chat/:roomId(\\d+)',
       name: 'chatRoom',
       component: MessagePanelView,
-      props: true,
+      props: route => ({ roomId: parseInt(route.params.roomId as string) }),
     },
   ],
 })

@@ -25,8 +25,7 @@ const filteredRooms = computed(() => {
   return rooms.value.filter(
     (room) =>
       room.name.toLowerCase().includes(query) ||
-      room.user_id.toLowerCase().includes(query) ||
-      room.last_comment_text.toLowerCase().includes(query),
+      room.participant.some(p => p.name.toLowerCase().includes(query)),
   )
 })
 </script>
@@ -34,23 +33,17 @@ const filteredRooms = computed(() => {
 <template>
   <aside
     class="col-span-12 md:col-span-4 flex flex-col h-screen border-r border-[#e8e8e8] bg-[#fafafa] absolute md:relative inset-0 transition-transform duration-300 ease-in-out z-10"
-    :class="showChatView ? '-translate-x-full md:translate-x-0' : 'translate-x-0'"
-  >
+    :class="showChatView ? '-translate-x-full md:translate-x-0' : 'translate-x-0'">
     <div class="sticky top-0 z-10 p-5 border-b border-[#e8e8e8] bg-[#fafafa]">
       <RoomSearch v-model="searchInput" />
     </div>
 
     <div class="flex-1 overflow-y-auto">
       <div v-if="filteredRooms.length > 0">
-        <div
-          v-for="room in filteredRooms"
-          :key="room.room_id"
-          class="cursor-pointer border-b border-[#f5f5f5]"
-          :class="{
-            'bg-[#DFDFDF]': route.params.roomId === room.room_id,
-          }"
-        >
-          <RouterLink :to="`/chat/${room.room_id}`" class="block">
+        <div v-for="room in filteredRooms" :key="room.id" class="cursor-pointer border-b border-[#f5f5f5]" :class="{
+          'bg-[#DFDFDF]': parseInt(route.params.roomId as string) === room.id,
+        }">
+          <RouterLink :to="`/chat/${room.id}`" class="block">
             <RoomList :room="room" />
           </RouterLink>
         </div>
