@@ -1,0 +1,45 @@
+{
+    "313621130": [
+        {
+            "id": "msg-1",
+            "room_id": "313621130",
+            "sender_id": "Khalil_Connelly79@gmail.com",
+            "sender_type": "system",
+            "type": "text",
+            "text": "agent test joined this conversation",
+            "timestamp": "2025-04-23T03:51:15Z"
+        },
+        {
+            "id": "msg-2",
+            "room_id": "313621130",
+            "sender_id": "me@example.com",
+            "sender_type": "agent",
+            "type": "product",
+            "text": "",
+            "timestamp": "2025-04-23T03:52:00Z",
+            "product": {
+                "name": "Wireless Headphones",
+                "price": 299000,
+                "image": "https://images.unsplash.com/photo-1517336714731-489689fd1ca8"
+            }
+        }
+    ],
+    "313621108": [
+        {
+            "id": "msg-1",
+            "room_id": "313621108",
+            "sender_id": "Aimee.Berge68@yahoo.com",
+            "sender_type": "customer",
+            "text": "Greenholttown",
+            "timestamp": "2025-04-23T03:51:11Z"
+        },
+        {
+            "id": "msg-2",
+            "room_id": "313621108",
+            "sender_id": "me@example.com",
+            "sender_type": "agent",
+            "text": "Hi Aimee, how can I assist you today?",
+            "timestamp": "2025-04-23T03:52:10Z"
+        }
+    ]
+}
